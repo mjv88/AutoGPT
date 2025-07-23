@@ -1,0 +1,9 @@
+gpt4all==2.2.0
+openai
+requests
+python-dotenv
+duckduckgo-search
+aiohttp
+watchdog
+click
+autogpt-plugin-template
