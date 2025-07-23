@@ -1,21 +1,22 @@
 FROM python:3.10-slim
 
-# Set working directory
 WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git \
+    build-essential \
+    gcc \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy source code
-COPY . .
+# Upgrade pip first
+RUN pip install --upgrade pip
 
-# Install Python dependencies
+# Copy requirements first and install them
+COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Set environment variables
-ENV PYTHONUNBUFFERED=1
+# Copy the rest of the app
+COPY . .
 
-# Run Auto-GPT
 CMD ["python", "-m", "autogpt"]
